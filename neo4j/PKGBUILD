@@ -41,18 +41,25 @@ package() {
   install -dm700 $pkgdir/$CONFIG_DIR/certificates
   install -Dm644 $srcdir/neo4j.conf $pkgdir/etc/neo4j/neo4j.conf
 
+  install -dm755 $pkgdir/usr/share/neo4j
+
+  NEO4J_HOME=$pkgdir/usr/share/neo4j
+
   # Data, import and log files
   DATA_DIR=var/lib/neo4j/data
   install -dm755 $pkgdir/$DATA_DIR
   [[ $(ls -A data/* 2>/dev/null) ]] && cp -r data/* $pkgdir/$DATA_DIR
+  ln -sf /$DATA_DIR $NEO4J_HOME/data
 
   IMPORT_DIR=var/lib/neo4j/import
   install -dm755 $pkgdir/$IMPORT_DIR
   [[ $(ls -A import/* 2>/dev/null) ]] && cp -r import/* $pkgdir/$IMPORT_DIR
+  ln -sf /$IMPORT_DIR $NEO4J_HOME/import
 
   LOG_DIR=var/log/neo4j
   install -dm755 $pkgdir/$LOG_DIR
   [[ $(ls -A logs/* 2>/dev/null) ]] && cp -r logs/* $pkgdir/$LOG_DIR
+  ln -sf /$LOG_DIR $NEO4J_HOME/logs
 
   # Copy JARs in lib and plugins
   LIB_DIR=usr/share/neo4j/lib
