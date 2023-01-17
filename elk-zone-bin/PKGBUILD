@@ -8,6 +8,7 @@ pkgrel=1
 arch=('any')
 license=('MIT')
 depends=('webkit2gtk' 'gtk3' 'libappindicator-gtk3' 'librsvg' 'libvips')
+conflicts=('elk-zone-git')
 
 source=("https://github.com/elk-zone/elk-native/releases/download/v${pkgver}/Elk_${pkgver}_linux_x86_64.deb")
 
